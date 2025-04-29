@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.firstapp.ui.theme.FirstAppTheme
+import androidx.compose.material3.Button
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,16 +48,26 @@ fun ResumenRetiroView(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Monto retirado: $ingresoFormat",
+                    text = "Monto retirado: $$ingresoFormat",
                     style = MaterialTheme.typography.bodyLarge
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Saldo restante: $saldoRestante",
+                    text = "Saldo restante: $$saldoRestante",
                     style = MaterialTheme.typography.bodyLarge
                 )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Button (
+                    onClick = {
+                        navController.navigate("pantallaPrincipal")
+                    }
+                ) {
+                    Text("Volver")
+                }
             }
         }
     }

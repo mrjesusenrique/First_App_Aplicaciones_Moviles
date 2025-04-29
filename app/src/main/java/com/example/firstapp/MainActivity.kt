@@ -27,6 +27,7 @@ class MainActivity : ComponentActivity() {
                             navController
                         )
                     }
+
                     composable("resumen-retiro/{saldoRestante}/{saldoRetirado}") { backStack ->
                         val saldoRestante = backStack.arguments?.getString("saldoRestante")?.toIntOrNull() ?: 0
                         val saldoRetirado = backStack.arguments?.getString("saldoRetirado")?.toIntOrNull() ?: 0

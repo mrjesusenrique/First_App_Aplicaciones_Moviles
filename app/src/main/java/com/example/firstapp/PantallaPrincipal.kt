@@ -32,7 +32,7 @@ fun PantallaPrincipalView(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    val saldoActual = 1_000_000
+    val saldoActual = 500_000
     val saldoIngresado = remember { mutableStateOf("") }
     val ingresoFormat = saldoIngresado.value.toIntOrNull() ?: 0
     val saldoRestante = saldoActual - ingresoFormat
@@ -72,7 +72,7 @@ fun PantallaPrincipalView(
                     Spacer(modifier = Modifier.height(15.dp))
 
                     Text(
-                        text = "$saldoActual",
+                        text = "$$saldoActual",
                         style = MaterialTheme.typography.titleLarge
                     )
 
