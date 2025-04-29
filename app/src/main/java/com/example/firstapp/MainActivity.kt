@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -21,10 +20,18 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = "paginaPrincipal"
+                    startDestination = "pantallaPrincipal"
                 ) {
-                    composable("paginaSecundaria") {
-                        // View de la página secundaria. Se le pasa navController
+                    composable("pantallaPrincipal") {
+                        PantallaPrincipalView(
+                            navController
+                        )
+                    }
+                    composable("resumen-retiro/{saldoRestante}/{saldoRetirado}") { backStack ->
+                        val saldoRestante = backStack.arguments?.getString("saldoRestante")?.toIntOrNull() ?: 0
+                        val saldoRetirado = backStack.arguments?.getString("saldoRetirado")?.toIntOrNull() ?: 0
+
+                        ResumenRetiroView(navController, saldoRestante, saldoRetirado)
                     }
                 }
             }
