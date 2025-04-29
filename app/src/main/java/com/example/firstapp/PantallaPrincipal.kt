@@ -34,9 +34,9 @@ fun PantallaPrincipalView(
 ) {
     val saldoActual = 1_000_000
     val saldoIngresado = remember { mutableStateOf("") }
-
     val ingresoFormat = saldoIngresado.value.toIntOrNull() ?: 0
     val saldoRestante = saldoActual - ingresoFormat
+    val mensajeError = remember { mutableStateOf("") }
 
     Scaffold(
         modifier = modifier,
@@ -92,10 +92,22 @@ fun PantallaPrincipalView(
 
                     Button(
                         onClick = {
-                            navController.navigate("resumen-retiro/$saldoRestante/$ingresoFormat")
+                            if (ingresoFormat in 1 until saldoActual) {
+                                navController.navigate("resumen-retiro/$saldoRestante/$ingresoFormat")
+                            } else {
+                                mensajeError.value = "Monto inválido: debe ser menor que el saldo actual y mayor a cero."
+                            }
                         }
                     ) {
                         Text("Retirar dinero")
+                    }
+
+                    if (mensajeError.value.isNotEmpty()) {
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Text(
+                            text = mensajeError.value,
+                            color = MaterialTheme.colorScheme.error
+                        )
                     }
                 }
             }
